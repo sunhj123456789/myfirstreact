@@ -1,14 +1,26 @@
-import React, { useState } from "react";
-import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalList";
-import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
-import "./App.css";
+import React, { useState } from 'react';
 
-const App = () => {
+import AddUser from './components/Users/AddUser';
+import UsersList from './components/Users/UsersList';
+
+function App() {
+  const [usersList, setUsersList] = useState([]);
+
+  const addUserHandler = (uName, uAge) => {
+    setUsersList((prevUsersList) => {
+      return [
+        ...prevUsersList,
+        { name: uName, age: uAge, id: Math.random().toString() },
+      ];
+    });
+  };
+
   return (
     <div>
-      <p>test</p>
+      <AddUser onAddUser={addUserHandler} />
+      <UsersList users={usersList} />
     </div>
   );
-};
+}
 
 export default App;
